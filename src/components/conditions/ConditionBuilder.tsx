@@ -15,7 +15,7 @@ export const ConditionBuilder = ({ addCondition, enableOperator }: Props) => {
     return null
   }
 
-  const { LOGICAL_OPERATORS } = Conditions.Operator
+  const LOGICAL_OPERATORS  = [Conditions.AND.operator, Conditions.OR.operator]
   // const PREBUILT_CONDITIONS: Record<string, unknown> = {
   //   ERC721Ownership: new Conditions.ERC721Ownership(),
   // }

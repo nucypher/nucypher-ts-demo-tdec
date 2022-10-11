@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Config as DappProviderConfig, DAppProvider, Rinkeby } from '@usedapp/core'
 import { App } from './App'
 
-const PROVIDER_URL =
+export const PROVIDER_URL =
   'https://hardworking-clean-gas.rinkeby.discover.quiknode.pro/17628d541fafc8312c89998c94610cf3c76613de/'
 
 const config: DappProviderConfig = {
@@ -12,6 +12,12 @@ const config: DappProviderConfig = {
     [Rinkeby.chainId]: PROVIDER_URL,
   },
   networks: [Rinkeby],
+}
+
+declare global {
+  interface Window {
+    ethereum: any
+  }
 }
 
 ReactDOM.render(
