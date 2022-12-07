@@ -89,7 +89,7 @@ export default function App() {
         {account && <p>Account: {account}</p>}
         <p>
           Access{" "}
-          <a href={"https://docs.buythefloor.com/testing-goerli/buythefloor-on-goerli-testnet"} target="_blank">
+          <a href={"https://goerli-nfts.vercel.app/"} target="_blank">
             the NFT Faucet
           </a>{" "}
           if needed
