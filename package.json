@@ -6,7 +6,8 @@
   "author": "Piotr Rosłaniec <p.roslaniec@gmail.com>",
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "tsc --noEmit && rimraf build && webpack --mode production --progress"
+    "build": "tsc --noEmit && rimraf build && webpack --mode production --progress",
+    "lint": "echo 'Not implemented'"
   },
   "dependencies": {
     "@nucypher/nucypher-ts": "^0.9.0",
