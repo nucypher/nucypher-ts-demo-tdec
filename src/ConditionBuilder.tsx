@@ -1,6 +1,6 @@
 import { ConditionSet, Condition, Conditions } from "@nucypher/nucypher-ts";
 import React, { useState } from "react";
-import { useEthers } from "@usedapp/core";
+import { Goerli, useEthers } from "@usedapp/core";
 
 interface Props {
   conditions?: ConditionSet;
@@ -17,7 +17,7 @@ export const ConditionBuilder = ({
   const NFTBalanceConfig = {
     contractAddress: '0x932Ca55B9Ef0b3094E8Fa82435b3b4c50d713043', // https://goerli-nfts.vercel.app/
     standardContractType: 'ERC721',
-    chain: 5,
+    chain: Goerli.chainId,
     method: 'ownerOf',
     parameters: [118],
     returnValueTest: {
