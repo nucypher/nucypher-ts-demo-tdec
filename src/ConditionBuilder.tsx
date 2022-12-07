@@ -15,7 +15,7 @@ export const ConditionBuilder = ({
 }: Props) => {
   const { library } = useEthers();
   const NFTBalanceConfig = {
-    contractAddress: '0x77566D540d1E207dFf8DA205ed78750F9a1e7c55',
+    contractAddress: '0x932Ca55B9Ef0b3094E8Fa82435b3b4c50d713043', // https://goerli-nfts.vercel.app/
     standardContractType: 'ERC721',
     chain: 5,
     method: 'ownerOf',
@@ -44,7 +44,7 @@ export const ConditionBuilder = ({
       onChange={(e: any) => onChange(e.target.value)}
       defaultValue={defaultValue}
     >
-      {}
+      { }
     </textarea>
   );
 
