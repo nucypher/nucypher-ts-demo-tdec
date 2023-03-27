@@ -1,6 +1,6 @@
-# nucypher-ts-demo
+# nucypher-ts-demo-tdec
 
-See the demo in action [here](https://nucypher-ts-demo.netlify.app/).
+See the demo in action [here](https://nucypher-ts-demo-tdec.netlify.app/).
 
 ## Installation
 
@@ -25,9 +25,9 @@ In order to connect with the network, the demo uses a public instances of [Porte
 
 `nucypher-ts` is in an early release. We recommend **not** using it in production _just yet_.
 
-### Ibex - Mumbai Testnet
+### Oryx/Tapir - Mumbai Testnet
 
-The current release of `nucypher-ts` supports Ursulas working on Ibex network and contracts deployed on Mumbai testnet.
+The current release of `nucypher-ts` supports Ursulas working on Oryx/Tapir networks and contracts deployed on Mumbai testnet.
 
 ## References
 
