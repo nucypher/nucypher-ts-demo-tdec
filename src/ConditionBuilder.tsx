@@ -1,6 +1,8 @@
-import { ConditionSet, Condition, Conditions } from "@nucypher/nucypher-ts";
+import { conditions } from "@nucypher/nucypher-ts";
 import React, { useState } from "react";
 import { Goerli, useEthers } from "@usedapp/core";
+
+const { ConditionSet, Condition } = conditions;
 
 interface Props {
   conditions?: ConditionSet;
