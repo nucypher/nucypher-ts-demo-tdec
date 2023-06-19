@@ -1,8 +1,7 @@
 import type {
-  MessageKit,
-  PolicyMessageKit,
-  DeployedStrategy,
-  ConditionSet,
+  DeployedCbdStrategy,
+  conditions,
+  Ciphertext,
 } from "@nucypher/nucypher-ts";
 import React, { useState } from "react";
 import { useEthers } from "@usedapp/core";
@@ -13,55 +12,51 @@ import { Encrypt } from "./Encrypt";
 import { Decrypt } from "./Decrypt";
 import { Spinner } from "./Spinner";
 import { StrategyBuilder } from "./StrategyBuilder";
+import { FerveoVariant } from "@nucypher/nucypher-ts";
 
+export type EncryptedMessage = { ciphertext: Ciphertext; aad: Uint8Array };
 export default function App() {
   const { activateBrowserWallet, deactivate, account } = useEthers();
 
   const [loading, setLoading] = useState(false);
-  const [deployedStrategy, setDeployedStrategy] = useState<DeployedStrategy>();
-  const [conditions, setConditions] = useState<ConditionSet>();
-  const [encryptedMessage, setEncryptedMessage] = useState<MessageKit>();
-  const [decryptedMessage, setDecryptedMessage] = useState("");
+  const [deployedStrategy, setDeployedStrategy] =
+    useState<DeployedCbdStrategy>();
+  const [conditionSet, setConditionSet] = useState<conditions.ConditionSet>();
+  const [encryptedMessage, setEncryptedMessage] = useState<EncryptedMessage>();
+  const [decryptedMessage, setDecryptedMessage] = useState<string>();
   const [decryptionErrors, setDecryptionErrors] = useState<string[]>([]);
 
   const encryptMessage = (plaintext: string) => {
+    if (!deployedStrategy || !conditionSet) {
+      return;
+    }
     setLoading(true);
-    deployedStrategy!.encrypter.conditions = conditions;
-    const encryptedMessage =
-      deployedStrategy!.encrypter.encryptMessage(plaintext);
-
+    const encryptedMessage = deployedStrategy
+      .makeEncrypter(conditionSet)
+      .encryptMessageCbd(plaintext);
     setEncryptedMessage(encryptedMessage);
     setLoading(false);
   };
 
-  const decryptMessage = async (ciphertext: MessageKit) => {
+  const decryptMessage = async (encryptedMessage: EncryptedMessage) => {
+    if (!deployedStrategy || !conditionSet) {
+      return;
+    }
     setLoading(true);
     setDecryptedMessage("");
     setDecryptionErrors([]);
 
     const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
-    const retrievedMessages = await deployedStrategy!.decrypter.retrieve(
-      [ciphertext],
-      web3Provider
-    );
-    const decryptedMessages = retrievedMessages.map((mk: PolicyMessageKit) => {
-      if (mk.isDecryptableByReceiver()) {
-        return deployedStrategy!.decrypter.decrypt(mk);
-      }
+    const decryptedMessage =
+      await deployedStrategy.decrypter.retrieveAndDecrypt(
+        web3Provider,
+        conditionSet,
+        FerveoVariant.Precomputed,
+        encryptedMessage.ciphertext,
+        encryptedMessage.aad
+      );
 
-      // If we are unable to decrypt, we may inspect the errors and handle them
-      if (Object.values(mk.errors).length > 0) {
-        const ursulasWithErrors: string[] = Object.entries(mk.errors).map(
-          ([address, error]) => `${address} - ${error}`
-        );
-        setDecryptionErrors(ursulasWithErrors);
-      } else {
-        setDecryptionErrors([]);
-      }
-      return new Uint8Array([]);
-    });
-
-    setDecryptedMessage(new TextDecoder().decode(decryptedMessages[0]));
+    setDecryptedMessage(new TextDecoder().decode(decryptedMessage));
     setLoading(false);
   };
 
@@ -100,12 +95,12 @@ export default function App() {
 
       <ConditionBuilder
         enabled={!!deployedStrategy}
-        conditions={conditions}
-        setConditions={setConditions}
+        conditionSet={conditionSet}
+        setConditions={setConditionSet}
       />
 
       <Encrypt
-        enabled={!!conditions}
+        enabled={!!conditionSet}
         encrypt={encryptMessage}
         encryptedMessage={encryptedMessage!}
       />
@@ -113,7 +108,7 @@ export default function App() {
       <Decrypt
         enabled={!!encryptedMessage}
         decrypt={decryptMessage}
-        decryptedMessage={decryptedMessage}
+        decryptedMessage={decryptedMessage ?? ""}
         decryptionErrors={decryptionErrors}
       />
     </div>

@@ -1,10 +1,10 @@
-import type { MessageKit } from "@nucypher/nucypher-ts";
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import type { EncryptedMessage } from "./App";
 
 interface Props {
   enabled: boolean;
-  encryptedMessage?: MessageKit;
+  encryptedMessage?: EncryptedMessage;
   encrypt: (value: string) => void;
 }
 
@@ -17,22 +17,33 @@ export const Encrypt = ({ encrypt, encryptedMessage, enabled }: Props) => {
 
   const onClick = () => encrypt(plaintext);
 
-  const CiphertextContent = () => {
+  const EncryptedMessageContent = () => {
     if (!encryptedMessage) {
       return <></>;
     }
 
-    const encodedEncryptedMessage = Buffer.from(
-      encryptedMessage.toBytes()
+    const encodedCiphertext = Buffer.from(
+      encryptedMessage.ciphertext.toBytes()
     ).toString("base64");
+    const encodedAad = Buffer.from(encryptedMessage.aad).toString("base64");
+
     return (
-      <div>
-        <h3>Encrypted message:</h3>
-        <pre className="encryptedMessage">{encodedEncryptedMessage}</pre>
-        <CopyToClipboard text={encodedEncryptedMessage}>
-          <button>Copy to clipboard</button>
-        </CopyToClipboard>
-      </div>
+      <>
+        <div>
+          <h3>Encrypted ciphertext:</h3>
+          <pre className="ciphertext">{encodedCiphertext}</pre>
+          <CopyToClipboard text={encodedCiphertext}>
+            <button>Copy to clipboard</button>
+          </CopyToClipboard>
+        </div>
+        <div>
+          <h3>Encrypted AAD:</h3>
+          <pre className="aad">{encodedAad}</pre>
+          <CopyToClipboard text={encodedAad}>
+            <button>Copy to clipboard</button>
+          </CopyToClipboard>
+        </div>
+      </>
     );
   };
 
@@ -45,7 +56,7 @@ export const Encrypt = ({ encrypt, encryptedMessage, enabled }: Props) => {
         onChange={(e) => setPlaintext(e.currentTarget.value)}
       />
       <button onClick={onClick}>Encrypt</button>
-      {CiphertextContent()}
+      {EncryptedMessageContent()}
     </div>
   );
 };

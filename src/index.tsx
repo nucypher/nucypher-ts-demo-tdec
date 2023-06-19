@@ -7,7 +7,7 @@ import App from "./App";
 
 const config: Config = {
   readOnlyChainId: Goerli.chainId,
-  networks: [Goerli]
+  networks: [Goerli],
 };
 const rootElement = document.getElementById("root");
 

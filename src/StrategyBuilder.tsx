@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Mumbai, Goerli, useEthers } from "@usedapp/core";
 import { ethers } from "ethers";
-import { Cohort, DeployedCbdStrategy, CbdStrategy } from "@nucypher/nucypher-ts";
+import {
+  Cohort,
+  DeployedCbdStrategy,
+  CbdStrategy,
+} from "@nucypher/nucypher-ts";
 
 interface Props {
   setDeployedStrategy: (strategy: DeployedCbdStrategy) => void;
@@ -17,7 +21,7 @@ export const StrategyBuilder = ({ setDeployedStrategy, setLoading }: Props) => {
     const cohortConfig = {
       threshold,
       shares,
-      porterUri: "https://porter-lynx.nucypher.community"
+      porterUri: "https://porter-lynx.nucypher.community",
     };
     const cohort = await Cohort.create(cohortConfig);
     console.log("Created cohort: ", cohort);
@@ -30,9 +34,7 @@ export const StrategyBuilder = ({ setDeployedStrategy, setLoading }: Props) => {
     const web3Provider = new ethers.providers.Web3Provider(window.ethereum);
 
     const cohort = await makeCohort();
-    const strategy = CbdStrategy.create(
-      cohort
-    );
+    const strategy = CbdStrategy.create(cohort);
     console.log("Created strategy: ", strategy);
 
     const deployedStrategy = await strategy.deploy(web3Provider);
