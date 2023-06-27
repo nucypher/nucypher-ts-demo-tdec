@@ -1,35 +1,30 @@
-import { ConditionSet, Condition, Conditions } from "@nucypher/nucypher-ts";
+import { conditions } from "@nucypher/nucypher-ts";
 import React, { useState } from "react";
-import { Goerli, useEthers } from "@usedapp/core";
+import { Mumbai, useEthers } from "@usedapp/core";
 
 interface Props {
-  conditions?: ConditionSet;
-  setConditions: (value: ConditionSet) => void;
+  conditionExpr?: conditions.ConditionExpression;
+  setConditions: (value: conditions.ConditionExpression) => void;
   enabled: boolean;
 }
 
 export const ConditionBuilder = ({
-  conditions,
+  conditionExpr,
   setConditions,
-  enabled
+  enabled,
 }: Props) => {
   const { library } = useEthers();
-  const NFTBalanceConfig = {
-    contractAddress: '0x932Ca55B9Ef0b3094E8Fa82435b3b4c50d713043', // https://goerli-nfts.vercel.app/
-    standardContractType: 'ERC721',
-    chain: Goerli.chainId,
-    method: 'ownerOf',
-    parameters: [118],
+  const RpcCondition = {
+    chain: Mumbai.chainId,
+    method: "eth_getBalance",
+    parameters: [":userAddress"],
     returnValueTest: {
-      comparator: '==',
-      value: ':userAddress',
+      comparator: ">",
+      value: "0",
     },
   };
-  const DEMO_CONDITION = JSON.stringify(NFTBalanceConfig);
-  const [conditionjson, setConditionJSON] = useState(
-    DEMO_CONDITION
-  );
-
+  const DEMO_CONDITION = JSON.stringify(RpcCondition);
+  const [conditionJson, setConditionJson] = useState(DEMO_CONDITION);
 
   if (!enabled || !library) {
     return <></>;
@@ -44,37 +39,29 @@ export const ConditionBuilder = ({
       onChange={(e: any) => onChange(e.target.value)}
       defaultValue={defaultValue}
     >
-      { }
+      {}
     </textarea>
   );
 
-
-  const ConditionJSONInput = makeInput(
-    setConditionJSON,
-    DEMO_CONDITION
-  );
-
+  const ConditionJSONInput = makeInput(setConditionJson, DEMO_CONDITION);
 
   const onCreateCondition = (e: any) => {
     e.preventDefault();
-    setConditions(new ConditionSet([new Conditions.Condition(JSON.parse(conditionjson))]));
+    setConditions(
+      new conditions.ConditionExpression(
+        new conditions.Condition(JSON.parse(conditionJson))
+      )
+    );
   };
 
-  const ConditionList =
-    conditions && conditions?.conditions.length > 0 ? (
-      <div>
-        <h3>Condition JSON Preview</h3>
-        <pre>
-          {conditions?.conditions.map((condition, index) => (
-            <div key={index}>
-              {JSON.stringify((condition as Condition).toObj(), null, 2)}
-            </div>
-          ))}
-        </pre>
-      </div>
-    ) : (
-      <></>
-    );
+  const ConditionList = conditionExpr && (
+    <div>
+      <h3>Condition JSON Preview</h3>
+      <pre>
+        <div>{JSON.stringify(conditionExpr.toObj(), null, 2)}</div>
+      </pre>
+    </div>
+  );
 
   return (
     <>

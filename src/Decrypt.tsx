@@ -1,9 +1,10 @@
-import { MessageKit } from "@nucypher/nucypher-ts";
+import { Ciphertext } from "@nucypher/nucypher-ts";
 import React, { useState } from "react";
+import type { EncryptedMessage } from "./App";
 
 interface Props {
   enabled: boolean;
-  decrypt: (ciphertext: MessageKit) => void;
+  decrypt: (encryptedMessage: EncryptedMessage) => void;
   decryptedMessage: string;
   decryptionErrors: string[];
 }
@@ -21,8 +22,10 @@ export const Decrypt = ({
   }
 
   const onDecrypt = () => {
-    const b64decoded = Buffer.from(ciphertext, "base64");
-    decrypt(MessageKit.fromBytes(b64decoded));
+    const encryptedMessage = {
+      ciphertext: Ciphertext.fromBytes(Buffer.from(ciphertext, "base64")),
+    };
+    decrypt(encryptedMessage);
   };
 
   const DecryptedMessage = () => {
@@ -45,7 +48,7 @@ export const Decrypt = ({
     return (
       <div>
         <h2>Decryption Errors</h2>
-        <p>Not enough cFrags retrieved to open capsule.</p>
+        <p>Not enough decryption shares to decrypt the message.</p>
         <p>Some Ursulas have failed with errors:</p>
         <ul>
           {decryptionErrors.map((error, index) => (
@@ -61,7 +64,7 @@ export const Decrypt = ({
       <h2>Step 3 - Decrypt Encrypted Message</h2>
       <input
         value={ciphertext}
-        placeholder="Enter encrypted message"
+        placeholder="Enter ciphertext"
         onChange={(e) => setCiphertext(e.currentTarget.value)}
       />
       <button onClick={onDecrypt}>Decrypt</button>
