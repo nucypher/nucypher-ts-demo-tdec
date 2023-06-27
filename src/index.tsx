@@ -1,13 +1,12 @@
 import React from "react";
 import { StrictMode } from "react";
 import * as ReactDOMClient from "react-dom/client";
-import { DAppProvider, Config, Goerli } from "@usedapp/core";
+import {DAppProvider, Config, Mumbai} from "@usedapp/core";
 
 import App from "./App";
 
 const config: Config = {
-  readOnlyChainId: Goerli.chainId,
-  networks: [Goerli],
+  networks: [Mumbai],
 };
 const rootElement = document.getElementById("root");
 
