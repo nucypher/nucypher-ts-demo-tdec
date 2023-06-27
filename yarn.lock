@@ -748,8 +748,10 @@
   resolved "https://registry.yarnpkg.com/@nucypher/nucypher-core/-/nucypher-core-0.10.0.tgz#95ba3805fa0c01510e9e012d65b735e97bd6ff08"
   integrity sha512-7ZbFIZbAIO8UU++0tGhZEP8z1m4Vj5b/4+c9opBXXK88GZ7DFjdNWeTJWOCwLK3fMSpQJcUmkkqfsUd+PfGa9A==
 
-"@nucypher/nucypher-ts@file:../nucypher-ts":
-  version "1.0.0-beta.1"
+"@nucypher/nucypher-ts@^1.0.0-alpha.0":
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@nucypher/nucypher-ts/-/nucypher-ts-1.0.0-alpha.0.tgz#00259022e30d46fb1ad50a39197aa19ed2400631"
+  integrity sha512-NA8L4Ed/cyioTCwNye+QGJIdn/FLoLgcj0BedDHJduRAWWK3oKaZV7X6XZdCKLbh8ZoVbr4e7UYH6Ec9H/VtUw==
   dependencies:
     "@nucypher/nucypher-core" "^0.10.0"
     axios "^0.21.1"
@@ -3744,9 +3746,9 @@ terser-webpack-plugin@^5.3.7:
     terser "^5.16.8"
 
 terser@^5.10.0, terser@^5.16.8:
-  version "5.18.1"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-5.18.1.tgz#6d8642508ae9fb7b48768e48f16d675c89a78460"
-  integrity sha512-j1n0Ao919h/Ai5r43VAnfV/7azUYW43GPxK7qSATzrsERfW7+y2QW9Cp9ufnRF5CQUWbnLSo7UJokSWCqg4tsQ==
+  version "5.18.2"
+  resolved "https://registry.yarnpkg.com/terser/-/terser-5.18.2.tgz#ff3072a0faf21ffd38f99acc9a0ddf7b5f07b948"
+  integrity sha512-Ah19JS86ypbJzTzvUCX7KOsEIhDaRONungA4aYBjEP3JZRf4ocuDzTg4QWZnPn9DEMiMYGJPiSOy7aykoCc70w==
   dependencies:
     "@jridgewell/source-map" "^0.3.3"
     acorn "^8.8.2"
