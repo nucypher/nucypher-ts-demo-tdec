@@ -25,7 +25,6 @@ export const Encrypt = ({ encrypt, encryptedMessage, enabled }: Props) => {
     const encodedCiphertext = Buffer.from(
       encryptedMessage.ciphertext.toBytes()
     ).toString("base64");
-    const encodedAad = Buffer.from(encryptedMessage.aad).toString("base64");
 
     return (
       <>
@@ -33,13 +32,6 @@ export const Encrypt = ({ encrypt, encryptedMessage, enabled }: Props) => {
           <h3>Encrypted ciphertext:</h3>
           <pre className="ciphertext">{encodedCiphertext}</pre>
           <CopyToClipboard text={encodedCiphertext}>
-            <button>Copy to clipboard</button>
-          </CopyToClipboard>
-        </div>
-        <div>
-          <h3>Encrypted AAD:</h3>
-          <pre className="aad">{encodedAad}</pre>
-          <CopyToClipboard text={encodedAad}>
             <button>Copy to clipboard</button>
           </CopyToClipboard>
         </div>

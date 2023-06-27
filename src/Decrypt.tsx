@@ -16,7 +16,6 @@ export const Decrypt = ({
   enabled,
 }: Props) => {
   const [ciphertext, setCiphertext] = useState("");
-  const [aad, setAad] = useState("");
 
   if (!enabled) {
     return <></>;
@@ -25,7 +24,6 @@ export const Decrypt = ({
   const onDecrypt = () => {
     const encryptedMessage = {
       ciphertext: Ciphertext.fromBytes(Buffer.from(ciphertext, "base64")),
-      aad: Buffer.from(aad, "base64"),
     };
     decrypt(encryptedMessage);
   };
@@ -68,11 +66,6 @@ export const Decrypt = ({
         value={ciphertext}
         placeholder="Enter ciphertext"
         onChange={(e) => setCiphertext(e.currentTarget.value)}
-      />
-      <input
-        value={aad}
-        placeholder="Enter AAD"
-        onChange={(e) => setAad(e.currentTarget.value)}
       />
       <button onClick={onDecrypt}>Decrypt</button>
       {DecryptedMessage()}
