@@ -29,12 +29,23 @@ export default function App() {
 
   useEffect(() => {
     const makeCohort = async () => {
-      const cohortConfig = {
-        threshold: 2,
-        shares: 2,
-        porterUri: "https://porter-lynx.nucypher.community",
-      };
-      const cohort = await Cohort.create(cohortConfig);
+      // const cohortConfig = {
+      //   threshold: 2,
+      //   shares: 2,
+      //   porterUri: "https://porter-lynx.nucypher.community",
+      // };
+      // const cohort = await Cohort.create(cohortConfig);
+      const cohort = Cohort.fromObj(
+          {
+            "threshold": 1,
+            "shares": 2,
+            "porterUri": "https://porter-lynx.nucypher.community",
+            ursulaAddresses: [
+                "0x210eeAC07542F815ebB6FD6689637D8cA2689392",
+                "0xb15d5A4e2be34f4bE154A1b08a94Ab920FfD8A41"
+            ]
+          }
+      )
       console.log("Created cohort: ", cohort);
       return cohort;
     };
@@ -44,7 +55,6 @@ export default function App() {
       const cohort = await makeCohort();
       const strategy = CbdStrategy.create(cohort);
       console.log("Created strategy: ", strategy);
-      // TODO: Instead of making a new strategy, we should be able to use the pre-made ritual
       const deployedStrategy = await strategy.deploy(web3Provider);
       setDeployedStrategy(deployedStrategy);
       console.log("Deployed Strategy: ", deployedStrategy);
