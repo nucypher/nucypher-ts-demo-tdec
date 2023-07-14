@@ -29,6 +29,7 @@ export default function App() {
 
   useEffect(() => {
     const makeCohort = async () => {
+      // TODO: This works, release a new alpha version of nucypher-ts
       const cohortConfig = {
         threshold: 2,
         shares: 2,
@@ -44,7 +45,6 @@ export default function App() {
       const cohort = await makeCohort();
       const strategy = CbdStrategy.create(cohort);
       console.log("Created strategy: ", strategy);
-      // TODO: Instead of making a new strategy, we should be able to use the pre-made ritual
       const deployedStrategy = await strategy.deploy(web3Provider);
       setDeployedStrategy(deployedStrategy);
       console.log("Deployed Strategy: ", deployedStrategy);
@@ -81,8 +81,8 @@ export default function App() {
       await deployedStrategy.decrypter.retrieveAndDecrypt(
         web3Provider,
         conditionExpr,
-        FerveoVariant.Precomputed,
-        encryptedMessage.ciphertext
+        FerveoVariant.Simple,
+        encryptedMessage.ciphertext,
       );
 
     setDecryptedMessage(new TextDecoder().decode(decryptedMessage));
