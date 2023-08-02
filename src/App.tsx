@@ -33,7 +33,7 @@ export default function App() {
       const cohortConfig = {
         threshold: 2,
         shares: 2,
-        porterUri: "https://porter-lynx.nucypher.community",
+        porterUri: "https://porter-tapir.nucypher.community",
       };
       const cohort = await Cohort.create(cohortConfig);
       console.log("Created cohort: ", cohort);
@@ -83,6 +83,7 @@ export default function App() {
         conditionExpr,
         FerveoVariant.Simple,
         encryptedMessage.ciphertext,
+          // false // Enable after this PR is released: https://github.com/nucypher/nucypher-ts/pull/232
       );
 
     setDecryptedMessage(new TextDecoder().decode(decryptedMessage));
