@@ -740,17 +740,17 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nucypher/nucypher-core@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@nucypher/nucypher-core/-/nucypher-core-0.10.0.tgz#95ba3805fa0c01510e9e012d65b735e97bd6ff08"
-  integrity sha512-7ZbFIZbAIO8UU++0tGhZEP8z1m4Vj5b/4+c9opBXXK88GZ7DFjdNWeTJWOCwLK3fMSpQJcUmkkqfsUd+PfGa9A==
+"@nucypher/nucypher-core@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@nucypher/nucypher-core/-/nucypher-core-0.11.0.tgz#696663586d0dd70eacfd433a75adc045fba7c24f"
+  integrity sha512-vr44+Vo1xKH17MHW+bQtm/fzEejVcZ9grSbHVS+KqkTytKbWb8ulX3Uc5AI0gli1FxwNwM5UbfqGE2IRai0dfQ==
 
-"@nucypher/nucypher-ts@^1.0.0-alpha.2":
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@nucypher/nucypher-ts/-/nucypher-ts-1.0.0-beta.3.tgz#4abd8355710f5e7ee35a6005df31447746505e10"
-  integrity sha512-G2B7uHvdR6kcBmsbMZ3HbEoWgzU278rHgK1BFBW3tJUve0E6eaVUSDR634lIJHbFrunjpGT+qKvVUuChfbu01w==
+"@nucypher/nucypher-ts@==1.0.0-alpha.2":
+  version "1.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@nucypher/nucypher-ts/-/nucypher-ts-1.0.0-alpha.2.tgz#b785eb608ad58eb4c12592a674d2a3ec5eac92ba"
+  integrity sha512-Ev8jFo190juQjw5uNV+DZCPzR/CYVFQL3e94UngO9RfOnbzgYkH9vrGvJLnS6oTAmlbsTE1+/rvrTET0WztF5g==
   dependencies:
-    "@nucypher/nucypher-core" "^0.10.0"
+    "@nucypher/nucypher-core" "^0.11.0"
     axios "^0.21.1"
     deep-equal "^2.2.1"
     ethers "^5.4.1"

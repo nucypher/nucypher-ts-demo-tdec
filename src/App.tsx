@@ -29,13 +29,7 @@ export default function App() {
 
   useEffect(() => {
     const makeCohort = async () => {
-      // TODO: This works, release a new alpha version of nucypher-ts
-      const cohortConfig = {
-        threshold: 2,
-        shares: 2,
-        porterUri: "https://porter-tapir.nucypher.community",
-      };
-      const cohort = await Cohort.create(cohortConfig);
+      const cohort = await Cohort.create("https://porter-tapir.nucypher.community", 3);
       console.log("Created cohort: ", cohort);
       return cohort;
     };
@@ -81,7 +75,7 @@ export default function App() {
       await deployedStrategy.decrypter.retrieveAndDecrypt(
         web3Provider,
         conditionExpr,
-        FerveoVariant.Simple,
+        FerveoVariant.simple,
         encryptedMessage.ciphertext,
           // false // Enable after this PR is released: https://github.com/nucypher/nucypher-ts/pull/232
       );
