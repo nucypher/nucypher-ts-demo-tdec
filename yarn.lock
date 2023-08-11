@@ -745,10 +745,10 @@
   resolved "https://registry.yarnpkg.com/@nucypher/nucypher-core/-/nucypher-core-0.11.0.tgz#696663586d0dd70eacfd433a75adc045fba7c24f"
   integrity sha512-vr44+Vo1xKH17MHW+bQtm/fzEejVcZ9grSbHVS+KqkTytKbWb8ulX3Uc5AI0gli1FxwNwM5UbfqGE2IRai0dfQ==
 
-"@nucypher/nucypher-ts@==1.0.0-alpha.2":
-  version "1.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@nucypher/nucypher-ts/-/nucypher-ts-1.0.0-alpha.2.tgz#b785eb608ad58eb4c12592a674d2a3ec5eac92ba"
-  integrity sha512-Ev8jFo190juQjw5uNV+DZCPzR/CYVFQL3e94UngO9RfOnbzgYkH9vrGvJLnS6oTAmlbsTE1+/rvrTET0WztF5g==
+"@nucypher/nucypher-ts@alpha":
+  version "1.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@nucypher/nucypher-ts/-/nucypher-ts-1.0.0-alpha.3.tgz#8dcfaf073d8a79f26aa14061e50149aa9bdf64db"
+  integrity sha512-Ki+Hx6qc1mHK20ZEqkKtUX8B03zu3rChFab2fyjWermojJydybU9yz5uxb6FbX3a6a2MMmeDc/XH9eYCvzTbyw==
   dependencies:
     "@nucypher/nucypher-core" "^0.11.0"
     axios "^0.21.1"
