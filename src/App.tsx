@@ -29,7 +29,12 @@ export default function App() {
 
   useEffect(() => {
     const makeCohort = async () => {
-      const cohort = await Cohort.create("https://porter-tapir.nucypher.community", 3);
+      const cohortConfig = {
+        threshold: 3,
+        shares: 4,
+        porterUri: "https://porter-tapir.nucypher.community"
+      };
+      const cohort = await Cohort.create(cohortConfig);
       console.log("Created cohort: ", cohort);
       return cohort;
     };
@@ -39,7 +44,7 @@ export default function App() {
       const cohort = await makeCohort();
       const strategy = CbdStrategy.create(cohort);
       console.log("Created strategy: ", strategy);
-      const deployedStrategy = await strategy.deploy(web3Provider);
+      const deployedStrategy = await strategy.deploy(web3Provider, 17);
       setDeployedStrategy(deployedStrategy);
       console.log("Deployed Strategy: ", deployedStrategy);
     };
@@ -75,7 +80,7 @@ export default function App() {
       await deployedStrategy.decrypter.retrieveAndDecrypt(
         web3Provider,
         conditionExpr,
-        FerveoVariant.simple,
+        FerveoVariant.Simple,
         encryptedMessage.ciphertext,
           // false // Enable after this PR is released: https://github.com/nucypher/nucypher-ts/pull/232
       );
