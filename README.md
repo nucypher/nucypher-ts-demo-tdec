@@ -1,3 +1,7 @@
+# This repository has been deprecated. Please visit [`nucypher-ts`](https://github.com/nucypher/nucypher-ts/tree/main/demos) repository for updated demos. 
+
+---
+
 # nucypher-ts-demo-tdec
 
 See the demo in action [here](https://nucypher-ts-demo-tdec.netlify.app/).
